@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-class Like extends Component {
-  
-  render() {
-    let classes = "fa fa-heart";
-    if (!this.props.liked) classes += "-o" 
-    return (
-      <i className={classes} onClick={this.props.onClick} aria-hidden="true"></i>
-     );
-  }
+// When using SFC instead of class don't use `this.props`
+// Instead use `props` only
+// and then pass in `props` as argument
+const Like = (props) => {
+  let classes = "fa fa-heart";
+  if (!props.liked) classes += "-o" 
+  return (
+    <i className={classes} style={{ cursor: 'pointer' }} onClick={props.onClick} aria-hidden="true"></i>
+   );
 }
  
 export default Like;
