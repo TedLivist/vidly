@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // When using SFC instead of class don't use `this.props`
 // Instead use `props` only
