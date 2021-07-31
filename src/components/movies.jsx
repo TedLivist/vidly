@@ -5,6 +5,7 @@ import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import ListGenre from './listGroup';
 import { genres, getGenres } from '../services/fakeGenreService';
+import { isArguments } from 'lodash';
 
 class Movies extends Component {
   state = {
@@ -33,10 +34,15 @@ class Movies extends Component {
     this.setState({ currentPage: page })
   }
 
-  handleGenreList = (genre) => {
+  handleGenreList = (genre = "") => {
     const movies = getMovies()
-    const genreMovies = movies.filter(m => m.genre._id == genre._id)
-    this.setState({ movies: genreMovies })
+    
+    if (genre !== "") {
+      const genreMovies = movies.filter(m => m.genre._id == genre._id)
+      this.setState({ movies: genreMovies })
+    } else {
+      this.setState({ movies })
+    }
   }
 
   render() {
