@@ -28,9 +28,12 @@ class Movies extends Component {
 
   // Whenever the state of a component is changed
   // The component and its children are re-rendered
-
   handlePageChange = (page) => {
     this.setState({ currentPage: page })
+  }
+
+  handleGenreList = (genre) => {
+    console.log(genre)
   }
 
   render() {
@@ -45,7 +48,9 @@ class Movies extends Component {
       <React.Fragment>
         <div className="row">
           <div className="col-3">
-            <ListGenre movies={this.state.movies}/>
+            <ListGenre
+              onListGenre={this.handleGenreList}
+              movies={this.state.movies}/>
           </div>
           <div className="col">
             <p>Showing {moviesCount} movies from the database</p>

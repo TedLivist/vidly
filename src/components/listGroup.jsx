@@ -5,13 +5,17 @@ class ListGenre extends Component {
   state = {  }
   render() { 
     return (
-
-      <ul class="list-group">
+      <ul className="list-group">
         {genres.map(genre =>
-          <li class="list-group-item">{genre.name}</li>
+          <li className="list-group-item"
+            onClick={() => this.props.onListGenre(genre)}
+            style={{cursor: 'pointer'}}
+            key={genre._id}>
+            <a>{genre.name}</a>
+          </li>
         )}
       </ul>
-     );
+    );
   }
 }
  
