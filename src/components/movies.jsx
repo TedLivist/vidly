@@ -53,7 +53,7 @@ class Movies extends Component {
           <div className="col-3">
             <ListGenre
               onListGenre={this.handleGenreList}
-              currentGenre={this.state.movies[0].genre.name}
+              currentMovies={this.state.movies}
               movies={this.state.movies}/>
           </div>
           <div className="col">
