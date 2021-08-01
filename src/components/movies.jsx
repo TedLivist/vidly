@@ -3,15 +3,20 @@ import { getMovies } from '../services/fakeMovieService';
 import Like from './common/like';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
-import ListGenre from './common/listGroup';
-import { genres, getGenres } from '../services/fakeGenreService';
+import ListGroup from './common/listGroup';
+import { getGenres } from '../services/fakeGenreService';
 import { isArguments } from 'lodash';
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
+    movies: [],
     pageSize: 4,
-    currentPage: 1
+    currentPage: 1,
+    genres: []
+  }
+
+  componentDidMount() {
+    this.setState({ movies: getMovies(), genres: getGenres() })
   }
   
   handleDelete = (movie) => {
@@ -34,15 +39,19 @@ class Movies extends Component {
     this.setState({ currentPage: page })
   }
 
-  handleGenreList = (genre = "") => {
-    const movies = getMovies()
+  // handleGenreList = (genre = "") => {
+  //   const movies = getMovies()
     
-    if (genre !== "") {
-      const genreMovies = movies.filter(m => m.genre._id == genre._id)
-      this.setState({ movies: genreMovies })
-    } else {
-      this.setState({ movies })
-    }
+  //   if (genre !== "") {
+  //     const genreMovies = movies.filter(m => m.genre._id == genre._id)
+  //     this.setState({ movies: genreMovies })
+  //   } else {
+  //     this.setState({ movies })
+  //   }
+  // }
+
+  handleGenreSelect = genre => {
+    console.log(genre)
   }
 
   render() {
@@ -57,10 +66,9 @@ class Movies extends Component {
       <React.Fragment>
         <div className="row">
           <div className="col-3">
-            <ListGenre
-              onListGenre={this.handleGenreList}
-              currentMovies={this.state.movies}
-              movies={this.state.movies}/>
+            <ListGroup
+              items={this.state.genres}
+              onItemSelect={this.handleGenreSelect}/>
           </div>
           <div className="col">
             <p>Showing {moviesCount} movies from the database</p>
