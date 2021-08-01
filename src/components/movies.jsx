@@ -3,7 +3,7 @@ import { getMovies } from '../services/fakeMovieService';
 import Like from './common/like';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
-import ListGenre from './listGroup';
+import ListGenre from './common/listGroup';
 import { genres, getGenres } from '../services/fakeGenreService';
 import { isArguments } from 'lodash';
 
