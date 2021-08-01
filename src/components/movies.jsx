@@ -5,7 +5,6 @@ import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import ListGroup from './common/listGroup';
 import { getGenres } from '../services/fakeGenreService';
-import { isArguments } from 'lodash';
 
 class Movies extends Component {
   state = {
@@ -68,8 +67,6 @@ class Movies extends Component {
           <div className="col-3">
             <ListGroup
               items={this.state.genres}
-              textProperty="name"
-              valueProperty="_id"
               onItemSelect={this.handleGenreSelect}/>
           </div>
           <div className="col">
