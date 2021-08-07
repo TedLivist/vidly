@@ -38,28 +38,18 @@ class Movies extends Component {
     this.setState({ currentPage: page })
   }
 
-  // handleGenreList = (genre = "") => {
-  //   const movies = getMovies()
-    
-  //   if (genre !== "") {
-  //     const genreMovies = movies.filter(m => m.genre._id == genre._id)
-  //     this.setState({ movies: genreMovies })
-  //   } else {
-  //     this.setState({ movies })
-  //   }
-  // }
-
   handleGenreSelect = genre => {
     this.setState({selectedGenre: genre})
   }
 
   render() {
     const { length: moviesCount } = this.state.movies
-    const { pageSize, currentPage, movies: allMovies } = this.state
+    const { pageSize, currentPage, selectedGenre, movies: allMovies } = this.state
 
     if (moviesCount === 0) return <p>There are no movies in the database</p>
     
-    const movies = paginate(allMovies, currentPage, pageSize);
+    const filtered = selectedGenre ? allMovies.filter(m => m.genre._id === selectedGenre._id) : allMovies;
+    const movies = paginate(filtered, currentPage, pageSize);
 
     return (
       <React.Fragment>
@@ -71,7 +61,7 @@ class Movies extends Component {
               onItemSelect={this.handleGenreSelect}/>
           </div>
           <div className="col">
-            <p>Showing {moviesCount} movies from the database</p>
+            <p>Showing {filtered.length} movies from the database</p>
             <table className="table">
               <thead>
                 <tr>
@@ -101,7 +91,7 @@ class Movies extends Component {
               </tbody>
             </table>
             <Pagination
-              itemsCount={moviesCount}
+              itemsCount={filtered.length}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={this.handlePageChange} />

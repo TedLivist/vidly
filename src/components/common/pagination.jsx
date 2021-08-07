@@ -29,5 +29,5 @@ Pagination.propTypes = {
   currentPage: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired
 }
- 
+
 export default Pagination;
